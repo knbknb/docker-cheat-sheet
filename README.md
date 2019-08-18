@@ -1,7 +1,5 @@
 # Docker Cheat Sheet
 
-**Want to improve this cheat sheet?  See the [Contributing](#contributing) section!**
-
 ## Table of Contents
 
 * [Why Docker](#why-docker)
@@ -22,59 +20,54 @@
 * [Tips](#tips)
 * [Contributing](#contributing)
 
-## Why Docker
-
-"With Docker, developers can build any app in any language using any toolchain. “Dockerized” apps are completely portable and can run anywhere - colleagues’ OS X and Windows laptops, QA servers running Ubuntu in the cloud, and production data center VMs running Red Hat.
-
-Developers can get going quickly by starting with one of the 13,000+ apps available on Docker Hub. Docker manages and tracks changes and dependencies, making it easier for sysadmins to understand how the apps that developers build work. And with Docker Hub, developers can automate their build pipeline and share artifacts with collaborators through public or private repositories.
-
 Docker helps developers build and ship higher-quality applications, faster." -- [What is Docker](https://www.docker.com/what-docker#copy1)
 
 ## Prerequisites
 
 I use [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) with the [Docker plugin](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker) for autocompletion of docker commands. YMMV.
 
-### Linux
+```sh
+# Shell Aliases  (bash-it help alias)
+docker:
+dk='docker'
+dklc='docker ps -l'       # List last Docker container'
+dklcid='docker ps -l -q'  # List last Docker container ID'
+dklcip='docker inspect -f "{{.NetworkSettings.IPAddress}}" $(docker ps -l -q)'  # Get IP of last Docker container'
+dkps='docker ps'          # List running Docker containers'
+dkpsa='docker ps -a'      # List all Docker containers'
+dki='docker images'       # List Docker images'
+dkrmac='docker rm $(docker ps -a -q)'                                   # Delete all Docker containers'
+dkrmui='docker images -q -f dangling=true | xargs docker rmi'           # Delete all untagged Docker images'
+dkrmui='docker images -q -f dangling=true | xargs -r docker rmi'        # Delete all untagged Docker images'
+dkrmlc='docker-remove-most-recent-container'                            # Delete most recent (i.e., last) Docker container'
+dkrmall='docker-remove-stale-assets'                                    # Delete all untagged images and exited containers'
+dkrmli='docker-remove-most-recent-image'                                # Delete most recent (i.e., last) Docker image'
+dkrmi='docker-remove-images'                                            # Delete images for supplied IDs or all if no IDs are passed as arguments'
+dkideps='docker-image-dependencies'                  # Output a graph of image dependencies using Graphiz'
+dkre='docker-runtime-environment'                    # List environmental variables of the supplied image ID'
+dkelc='docker exec -it $(dklcid) bash --login'       # Enter last container (works with Docker 1.3 and above)'
+dkrmflast='docker rm -f $(dklcid)'
+dkbash='dkelc'
+dkex='docker exec -it '                              # Useful to run any commands in a container without leaving host'
+dkri='docker run --rm -i '
+dkrit='docker run --rm -it '
+dkip='docker image prune -a -f'
+dkvp='docker volume prune -f'
+dksp='docker system prune -a -f'
 
-The 3.10.x kernel is [the minimum requirement](https://docs.docker.com/engine/installation/binaries/#check-kernel-dependencies) for Docker.
-
-### MacOS
-
-10.8 “Mountain Lion” or newer is required.
-
-## Installation
-
-### Linux
-
-Quick and easy install script provided by Docker:
+docker:
+docker-archive-content     # show the content of the provided Docker image archive
+docker-enter               # enter the specified docker container using bash
+docker-image-dependencies  # attempt to create a Graphiz image of the supplied image ID dependencies
+docker-remove-images                   # attempt to remove images with supplied tags or all if no tags are supplied
+docker-remove-most-recent-container    # attempt to remove the most recent container from docker ps -a
+docker-remove-most-recent-image        # attempt to remove the most recent image from docker images
+docker-remove-stale-assets             # attempt to remove exited containers and dangling images
+docker-runtime-environment             # attempt to list the environmental variables of the supplied image ID
 
 ```
-curl -sSL https://get.docker.com/ | sh
-```
-
-If you're not willing to run a random shell script, please see the [installation](https://docs.docker.com/engine/installation/linux/) instructions for your distribution.
-
-If you are a complete Docker newbie, you should follow the [series of tutorials](https://docs.docker.com/engine/getstarted/) now.
-
-### macOS
-
-Download and install [Docker Community Edition](https://www.docker.com/community-edition). if you have Homebrew-Cask, just type `brew cask install docker`. Or Download and install [Docker Toolbox](https://docs.docker.com/toolbox/overview/).  [Docker For Mac](https://docs.docker.com/docker-for-mac/) is nice, but it's not quite as finished as the VirtualBox install.  [See the comparison](https://docs.docker.com/docker-for-mac/docker-toolbox/).
-
-> **NOTE** Docker Toolbox is legacy. You should to use Docker Community Edition, See [Docker Toolbox](https://docs.docker.com/toolbox/overview/).
-
-Once you've installed Docker Community Edition, click the docker icon in Launchpad. Then start up a container:
-
-```
-docker run hello-world
-```
-
-That's it, you have a running Docker container.
-
-If you are a complete Docker newbie, you should probably follow the [series of tutorials](https://docs.docker.com/engine/getstarted/) now.
 
 ### Check Version
-
-It is very important that you always know the current version of Docker you are currently running on at any point in time. This is very helpful because you get to know what features are compatible with what you have running. This is also important because you know what containers to run from the docker store when you are trying to get template containers. That said let see how to know which version of docker we have running currently.
 
 * [`docker version`](https://docs.docker.com/engine/reference/commandline/version/) shows which version of docker you have running.
 
@@ -83,20 +76,18 @@ Get the server version:
 ```
 $ docker version --format '{{.Server.Version}}'
 
-1.8.0
+1.19.3
 ```
 
 You can also dump raw JSON data:
 
 ```
-$ docker version --format '{{json .}}'
+$ docker version --format '{{json .}} | jq .'
 
 {"Client":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"am"}
 ```
 
 ## Containers
-
-[Your basic isolated Docker process](http://etherealmind.com/basics-docker-containers-hypervisors-coreos/). Containers are to Virtual Machines as threads are to processes. Or you can think of them as chroots on steroids.
 
 ### Lifecycle
 
