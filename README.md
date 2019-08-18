@@ -80,11 +80,15 @@ $ docker version --format '{{.Server.Version}}'
 You can also dump raw JSON data:
 
 ```
-$ docker version --format '{{json .}} | jq .'
+$ docker version --format '{{json .}}' | jq .
 
 {"Client":{"Platform":{"Name":"Docker Engine - Community"},"Version":"19.03.1","ApiVersion":"1.40","DefaultAPIVersion":"1.40","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","Os":"linux","Arch":"amd64","BuildTime":"Thu Jul 25 21:21:35 2019","Experimental":false},"Server":{"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"19.03.1","Details":{"ApiVersion":"1.40","Arch":"amd64","BuildTime":"Thu Jul 25 21:20:09 2019","Experimental":"true","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","KernelVersion":"4.4.0-93-generic","MinAPIVersion":"1.12","Os":"linux"}},{"Name":"containerd","Version":"1.2.6","Details":{"GitCommit":"894b81a4b802e4eb2a91d1ce216b8817763c29fb"}},{"Name":"runc","Version":"1.0.0-rc8","Details":{"GitCommit":"425e105d5a03fabd737a126ad93d62a9eeede87f"}},{"Name":"docker-init","Version":"0.18.0","Details":{"GitCommit":"fec3683"}}],"Version":"19.03.1","ApiVersion":"1.40","MinAPIVersion":"1.12","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","Os":"linux","Arch":"amd64","KernelVersion":"4.4.0-93-generic","Experimental":true,"BuildTime":"2019-07-25T21:20:09.000000000+00:00"}}
 
 ```
+
+Get detailed Docker version output in a more human-readable form:
+
+`docker system info `
 
 ## Containers
 
