@@ -2,9 +2,7 @@
 
 ## Table of Contents
 
-* [Why Docker](#why-docker)
 * [Prerequisites](#prerequisites)
-* [Installation](#installation)
 * [Containers](#containers)
 * [Images](#images)
 * [Networks](#networks)
@@ -22,9 +20,9 @@
 
 Docker helps developers build and ship higher-quality applications, faster." -- [What is Docker](https://www.docker.com/what-docker#copy1)
 
-## Prerequisites
+## Customizations
 
-I use [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh) with the [Docker plugin](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker) for autocompletion of docker commands. YMMV.
+I use [bash_it](https://github.com/Bash-it/bash-it/) with the [Docker plugin](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker), aliases and completions for autocompletion of docker commands:
 
 ```sh
 # Shell Aliases  (bash-it help alias)
@@ -76,7 +74,7 @@ Get the server version:
 ```
 $ docker version --format '{{.Server.Version}}'
 
-1.19.3
+19.03.1
 ```
 
 You can also dump raw JSON data:
@@ -84,7 +82,8 @@ You can also dump raw JSON data:
 ```
 $ docker version --format '{{json .}} | jq .'
 
-{"Client":{"Version":"1.8.0","ApiVersion":"1.20","GitCommit":"f5bae0a","GoVersion":"go1.4.2","Os":"linux","Arch":"am"}
+{"Client":{"Platform":{"Name":"Docker Engine - Community"},"Version":"19.03.1","ApiVersion":"1.40","DefaultAPIVersion":"1.40","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","Os":"linux","Arch":"amd64","BuildTime":"Thu Jul 25 21:21:35 2019","Experimental":false},"Server":{"Platform":{"Name":"Docker Engine - Community"},"Components":[{"Name":"Engine","Version":"19.03.1","Details":{"ApiVersion":"1.40","Arch":"amd64","BuildTime":"Thu Jul 25 21:20:09 2019","Experimental":"true","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","KernelVersion":"4.4.0-93-generic","MinAPIVersion":"1.12","Os":"linux"}},{"Name":"containerd","Version":"1.2.6","Details":{"GitCommit":"894b81a4b802e4eb2a91d1ce216b8817763c29fb"}},{"Name":"runc","Version":"1.0.0-rc8","Details":{"GitCommit":"425e105d5a03fabd737a126ad93d62a9eeede87f"}},{"Name":"docker-init","Version":"0.18.0","Details":{"GitCommit":"fec3683"}}],"Version":"19.03.1","ApiVersion":"1.40","MinAPIVersion":"1.12","GitCommit":"74b1e89e8a","GoVersion":"go1.12.5","Os":"linux","Arch":"amd64","KernelVersion":"4.4.0-93-generic","Experimental":true,"BuildTime":"2019-07-25T21:20:09.000000000+00:00"}}
+
 ```
 
 ## Containers
