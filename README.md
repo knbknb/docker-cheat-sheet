@@ -18,7 +18,7 @@
 * [Tips](#tips)
 * [Contributing](#contributing)
 
-Docker helps developers build and ship higher-quality applications, faster." -- [What is Docker](https://www.docker.com/what-docker#copy1)
+[What is Docker](https://www.docker.com/what-docker#copy1)
 
 ## Customizations
 
