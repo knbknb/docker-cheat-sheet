@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Prerequisites](#prerequisites)
+* [Customiztions](#customizations)
 * [Containers](#containers)
 * [Images](#images)
 * [Networks](#networks)
@@ -22,7 +22,7 @@ Docker helps developers build and ship higher-quality applications, faster." -- 
 
 ## Customizations
 
-I use [bash_it](https://github.com/Bash-it/bash-it/) with the [Docker plugin](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#docker), aliases and completions for autocompletion of docker commands:
+I use [bash_it](https://github.com/Bash-it/bash-it/) with the [Docker plugin](https://github.com/Bash-it/bash-it/blob/master/plugins/available/docker.plugin.bash), aliases and completions for autocompletion of docker commands:
 
 ```sh
 # Shell Aliases  (bash-it help alias)
