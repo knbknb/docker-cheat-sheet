@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Customiztions](#customizations)
+* [Customizations](#customizations)
 * [Containers](#containers)
 * [Images](#images)
 * [Networks](#networks)
@@ -17,8 +17,10 @@
 * [Security](#security)
 * [Tips](#tips)
 * [Contributing](#contributing)
+* [To Do / To Be Completed:](#to-do)
 
 [What is Docker](https://www.docker.com/what-docker#copy1)
+
 
 ## Customizations
 
@@ -819,3 +821,7 @@ docker run --rm -it -v "$PWD/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro" -
 This is my personal copy. 
 
 Please contribute to the *original* Github repository, [wsargent/docker-cheat-sheet](https://github.com/wsargent/docker-cheat-sheet).
+
+## To Do
+
+- Add [Docker Swarm](https://docs.docker.com/engine/swarm/) commands and use cases
